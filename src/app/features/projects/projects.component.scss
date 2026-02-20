@@ -1,0 +1,283 @@
+// =============================================================================
+// projects.component.scss
+// =============================================================================
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.projects-page {
+    background: $background;
+}
+
+// Filters bar
+.filters-bar {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-bottom: $spacing-8;
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    box-shadow: $shadow-sm;
+    border: 1px solid rgba($book-sand, 0.8);
+}
+
+.search-wrap {
+    position: relative;
+
+    .search-icon {
+        position: absolute;
+        left: $spacing-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $text-muted;
+        pointer-events: none;
+    }
+}
+
+.search-input {
+    width: 100%;
+    padding: $spacing-3 $spacing-4 $spacing-3 $spacing-10;
+    border: 1.5px solid rgba($book-sand, 0.8);
+    border-radius: $radius-lg;
+    font-size: $font-size-base;
+    color: $text-dark;
+    background: $background;
+    transition: border-color $transition-fast;
+
+    &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+}
+
+.filter-chip {
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-full;
+    border: 1.5px solid rgba($book-sand, 0.8);
+    background: $background;
+    color: $text-light;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active,
+    &:hover {
+        background: $primary;
+        color: $white;
+        border-color: $primary;
+        box-shadow: 0 2px 8px rgba($primary, 0.3);
+    }
+}
+
+.filters-actions {
+    display: flex;
+    gap: $spacing-3;
+    align-items: center;
+}
+
+.btn-reset {
+    padding: $spacing-2 $spacing-5;
+    border-radius: $radius-md;
+    border: 1.5px solid rgba($book-coral, 0.3);
+    background: rgba($book-coral, 0.08);
+    color: darken($book-coral, 10%);
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $book-coral;
+        color: $white;
+    }
+}
+
+.btn-refresh {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-md;
+    border: 1.5px solid rgba($primary, 0.25);
+    background: rgba($primary, 0.08);
+    color: $primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $primary;
+        color: $white;
+        box-shadow: $shadow-glow;
+
+        svg {
+            animation: spin 0.5s linear;
+        }
+    }
+}
+
+// Results meta
+.results-meta {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-bottom: $spacing-6;
+}
+
+// Projects grid
+.projects-grid {
+    @include grid-auto-fit(300px);
+}
+
+// Loading skeleton
+.loading-grid {
+    @include grid-auto-fit(300px);
+}
+
+.skeleton-card {
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    border: 1px solid rgba($book-sand, 0.8);
+}
+
+// Empty state
+.empty-state {
+    text-align: center;
+    padding: $spacing-16 $spacing-6;
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: $spacing-4;
+    }
+
+    h3 {
+        font-size: $font-size-xl;
+        color: $text-dark;
+        margin-bottom: $spacing-3;
+    }
+
+    p {
+        color: $text-light;
+    }
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: $primary;
+    cursor: pointer;
+    font-size: inherit;
+    text-decoration: underline;
+}
+
+// Modal
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba($text-dark, 0.65);
+    backdrop-filter: blur(8px);
+    z-index: $z-modal;
+    @include flex-center;
+    padding: $spacing-6;
+    animation: fadeInDown 0.3s ease-out;
+}
+
+.modal {
+    background: $background;
+    border-radius: $radius-2xl;
+    padding: $spacing-8;
+    max-width: 640px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: $shadow-xl;
+    @include custom-scrollbar;
+
+    &__close {
+        position: absolute;
+        top: $spacing-4;
+        right: $spacing-4;
+        @include flex-center;
+        width: 36px;
+        height: 36px;
+        border-radius: $radius-full;
+        background: rgba($text-dark, 0.06);
+        color: $text-dark;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+            background: rgba($secondary, 0.2);
+            color: $secondary;
+        }
+    }
+
+    &__header {
+        @include flex-between;
+        flex-wrap: wrap;
+        gap: $spacing-3;
+        margin-bottom: $spacing-4;
+        padding-right: $spacing-8;
+    }
+
+    &__title {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $text-dark;
+    }
+
+    &__badges {
+        display: flex;
+        gap: $spacing-2;
+        flex-wrap: wrap;
+    }
+
+    &__desc {
+        font-size: $font-size-base;
+        color: $text-light;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-6;
+    }
+
+    &__highlights {
+        background: rgba($primary, 0.05);
+        border-left: 3px solid $primary;
+        border-radius: 0 $radius-md $radius-md 0;
+        padding: $spacing-4 $spacing-6;
+        margin-bottom: $spacing-6;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+
+        li {
+            font-size: $font-size-sm;
+            color: $text-dark;
+            line-height: $line-height-relaxed;
+        }
+    }
+
+    &__techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-2;
+        margin-bottom: $spacing-5;
+    }
+
+    &__meta {
+        font-size: $font-size-sm;
+        color: $text-light;
+        margin-bottom: $spacing-6;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $spacing-3;
+        flex-wrap: wrap;
+    }
+}

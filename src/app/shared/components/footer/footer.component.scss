@@ -1,0 +1,163 @@
+// =============================================================================
+// footer.component.scss
+// =============================================================================
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.footer {
+    background: $text-dark;
+    color: rgba($white, 0.8);
+    margin-top: auto;
+
+    &__top {
+        padding: $spacing-16 0 $spacing-10;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: $spacing-12;
+
+        @include max-md {
+            grid-template-columns: 1fr;
+            gap: $spacing-8;
+        }
+    }
+
+    &__heading {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $book-mint;
+        margin-bottom: $spacing-4;
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-3;
+    }
+
+    &__link {
+        color: rgba($white, 0.65);
+        text-decoration: none;
+        font-size: $font-size-sm;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $book-mint;
+        }
+    }
+
+    &__text {
+        color: rgba($white, 0.65);
+        font-size: $font-size-sm;
+    }
+
+    &__bottom {
+        border-top: 1px solid rgba($white, 0.08);
+        padding: $spacing-5 0;
+
+        .container {
+            @include flex-between;
+
+            @include max-md {
+                flex-direction: column;
+                gap: $spacing-3;
+            }
+        }
+    }
+
+    &__copy {
+        font-size: $font-size-sm;
+        color: rgba($white, 0.5);
+
+        strong {
+            color: rgba($white, 0.8);
+        }
+    }
+}
+
+// Brand section
+.footer__brand {
+    .brand-logo {
+        @include flex-center;
+        justify-content: flex-start;
+        gap: $spacing-3;
+        margin-bottom: $spacing-4;
+
+        .logo-icon {
+            font-size: $font-size-xl;
+            font-weight: $font-weight-black;
+            font-family: $font-family-mono;
+            color: $book-mint;
+            background: rgba($book-mint, 0.12);
+            padding: $spacing-1 $spacing-2;
+            border-radius: $radius-sm;
+        }
+
+        .logo-text {
+            font-size: $font-size-lg;
+            color: $white;
+
+            strong {
+                color: $book-mint;
+            }
+        }
+    }
+
+    .brand-desc {
+        font-size: $font-size-sm;
+        line-height: $line-height-relaxed;
+        color: rgba($white, 0.6);
+        max-width: 320px;
+        margin-bottom: $spacing-6;
+    }
+}
+
+// Social links
+.social-links {
+    display: flex;
+    gap: $spacing-3;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-lg;
+    background: rgba($white, 0.08);
+    color: rgba($white, 0.7);
+    transition: all $transition-fast;
+    border: 1px solid rgba($white, 0.08);
+
+    &:hover {
+        background: $primary;
+        color: $white;
+        border-color: $primary;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba($primary, 0.4);
+    }
+}
+
+// Back to top
+.back-to-top {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-full;
+    background: rgba($white, 0.1);
+    color: rgba($white, 0.7);
+    cursor: pointer;
+    transition: all $transition-fast;
+    border: 1px solid rgba($white, 0.1);
+
+    &:hover {
+        background: $primary;
+        color: $white;
+        transform: translateY(-3px);
+        box-shadow: $shadow-glow;
+    }
+}

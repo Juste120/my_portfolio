@@ -1,0 +1,77 @@
+<!-- =====================================================================
+     header.component.html
+     ===================================================================== -->
+<header class="header" [class.scrolled]="isScrolled" [class.menu-open]="isMenuOpen" role="banner">
+  <div class="header__inner">
+
+    <!-- Logo / Brand -->
+    <a routerLink="/" class="header__logo" (click)="closeMenu()" aria-label="PAKOU Juste — Accueil">
+      <span class="logo-icon">&lt;/&gt;</span>
+      <span class="logo-text">
+        <strong>Juste</strong> Pakou
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav" role="navigation" aria-label="Navigation principale">
+      <ul class="nav-list">
+        @for (item of navItems; track item.route) {
+          <li class="nav-item">
+            <a
+              [routerLink]="item.route"
+              class="nav-link"
+              [class.active]="isActive(item.route)"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+              (click)="closeMenu()">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- CTA Button (desktop) -->
+    <a routerLink="/contact" class="header__cta btn-primary" (click)="closeMenu()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      Me Contacter
+    </a>
+
+    <!-- Burger Menu Button (mobile) -->
+    <button
+      class="header__burger"
+      [class.open]="isMenuOpen"
+      (click)="toggleMenu()"
+      aria-label="Ouvrir le menu"
+      [attr.aria-expanded]="isMenuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav" [class.open]="isMenuOpen" role="dialog" aria-label="Menu mobile">
+    <nav>
+      <ul class="mobile-nav__list">
+        @for (item of navItems; track item.route) {
+          <li>
+            <a
+              [routerLink]="item.route"
+              class="mobile-nav__link"
+              [class.active]="isActive(item.route)"
+              (click)="closeMenu()">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+        <li>
+          <a routerLink="/contact" class="btn-primary mobile-cta" (click)="closeMenu()">
+            Me Contacter
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,330 @@
+// =============================================================================
+// certifications.component.scss
+// =============================================================================
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.certifications-page {
+    background: $bg-alt;
+}
+
+// Stats
+.cert-stats {
+    display: flex;
+    gap: $spacing-4;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-8;
+}
+
+.stat-pill {
+    @include flex-center;
+    flex-direction: column;
+    gap: $spacing-1;
+    padding: $spacing-5 $spacing-8;
+    background: $white;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-md;
+    min-width: 120px;
+    border: 1px solid rgba($book-sand, 0.8);
+
+    &.active {
+        border-color: rgba($primary, 0.3);
+    }
+
+    &.this-year {
+        border-color: rgba($secondary, 0.3);
+    }
+}
+
+.stat-num {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-black;
+    @include text-gradient($primary, $secondary);
+    line-height: 1;
+}
+
+.stat-lbl {
+    font-size: $font-size-sm;
+    color: $text-light;
+    font-weight: $font-weight-medium;
+}
+
+// Filters
+.cert-filters {
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    box-shadow: $shadow-sm;
+    border: 1px solid rgba($book-sand, 0.8);
+    margin-bottom: $spacing-6;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+}
+
+.filter-row {
+    display: flex;
+    gap: $spacing-4;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    gap: $spacing-2;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-full;
+    border: 1.5px solid rgba($book-sand, 0.8);
+    background: $background;
+    color: $text-light;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active,
+    &:hover {
+        background: $primary;
+        color: $white;
+        border-color: $primary;
+    }
+}
+
+.search-wrap {
+    position: relative;
+
+    .search-icon {
+        position: absolute;
+        left: $spacing-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $text-muted;
+        pointer-events: none;
+    }
+}
+
+.search-input {
+    width: 100%;
+    padding: $spacing-3 $spacing-4 $spacing-3 $spacing-10;
+    border: 1.5px solid rgba($book-sand, 0.8);
+    border-radius: $radius-lg;
+    font-size: $font-size-base;
+    background: $background;
+    transition: border-color $transition-fast;
+
+    &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+}
+
+.issuer-select {
+    padding: $spacing-2 $spacing-4;
+    border: 1.5px solid rgba($book-sand, 0.8);
+    border-radius: $radius-lg;
+    background: $background;
+    font-size: $font-size-sm;
+    color: $text-dark;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        border-color: $primary;
+    }
+}
+
+.btn-refresh {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-md;
+    border: 1.5px solid rgba($primary, 0.25);
+    background: rgba($primary, 0.08);
+    color: $primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+        background: $primary;
+        color: $white;
+    }
+}
+
+.results-meta {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-bottom: $spacing-6;
+}
+
+// Certs grid
+.certs-grid {
+    @include grid-auto-fit(240px);
+}
+
+.skeleton-card {
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-8;
+    text-align: center;
+    border: 1px solid rgba($book-sand, 0.8);
+}
+
+.cert-card {
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    box-shadow: $shadow-md;
+    border: 1px solid rgba($book-sand, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: $spacing-4;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: $shadow-xl;
+    }
+
+    &.expired {
+        opacity: 0.7;
+        filter: grayscale(0.4);
+    }
+
+    &__status {
+        @include flex-center;
+        gap: $spacing-2;
+        align-self: flex-end;
+        font-size: $font-size-xs;
+        color: $text-muted;
+    }
+
+    &__img {
+        width: 80px;
+        height: 80px;
+        @include flex-center;
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: $radius-md;
+        }
+    }
+
+    &__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-1;
+    }
+
+    &__name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $text-dark;
+    }
+
+    &__issuer {
+        font-size: $font-size-xs;
+        color: $primary;
+        font-weight: $font-weight-medium;
+    }
+
+    &__date {
+        font-size: $font-size-xs;
+        color: $text-muted;
+    }
+
+    &__expiry {
+        font-size: $font-size-xs;
+        color: $book-coral;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $spacing-2;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.cert-placeholder {
+    font-size: 3rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &.active {
+        background: $book-mint;
+        box-shadow: 0 0 6px rgba($book-mint, 0.6);
+    }
+
+    &.expired {
+        background: $book-coral;
+    }
+}
+
+.status-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+}
+
+.cert-btn {
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    background: rgba($primary, 0.1);
+    color: $primary;
+    border: 1px solid rgba($primary, 0.2);
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $primary;
+        color: $white;
+    }
+
+    &--verify {
+        background: rgba($book-mint, 0.1);
+        color: darken($book-mint, 20%);
+        border-color: rgba($book-mint, 0.2);
+
+        &:hover {
+            background: $book-mint;
+            color: $white;
+        }
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: $spacing-16 $spacing-6;
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: $spacing-4;
+    }
+
+    h3 {
+        font-size: $font-size-xl;
+        color: $text-dark;
+        margin-bottom: $spacing-3;
+    }
+
+    p {
+        color: $text-light;
+    }
+}

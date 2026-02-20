@@ -1,0 +1,172 @@
+// =============================================================================
+// project-card.component.scss
+// =============================================================================
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.project-card {
+    @include card-base;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    padding: $spacing-6;
+    cursor: pointer;
+    background: $gradient-card;
+    border: 1px solid rgba($book-sand, 0.8);
+
+    &.featured {
+        border-color: rgba($primary, 0.3);
+        background: linear-gradient(145deg, rgba($white, 0.95) 0%, rgba($book-mint, 0.08) 100%);
+
+        .card__title {
+            color: $primary;
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary;
+        outline-offset: 3px;
+    }
+}
+
+.card__header {
+    @include flex-between;
+    gap: $spacing-2;
+    flex-wrap: wrap;
+
+    .card__badges {
+        display: flex;
+        gap: $spacing-2;
+        flex-wrap: wrap;
+    }
+
+    .card__stars {
+        @include flex-center;
+        gap: $spacing-1;
+        font-size: $font-size-sm;
+        color: $book-coral;
+        font-weight: $font-weight-semibold;
+    }
+}
+
+.card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+}
+
+.card__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-dark;
+    line-height: $line-height-tight;
+    transition: color $transition-fast;
+
+    .project-card:hover & {
+        color: $primary;
+    }
+}
+
+.card__desc {
+    font-size: $font-size-sm;
+    color: $text-light;
+    line-height: $line-height-relaxed;
+    @include truncate(3);
+}
+
+.card__meta {
+    font-size: $font-size-xs;
+    color: $text-muted;
+
+    .meta-role {
+        font-weight: $font-weight-medium;
+    }
+
+    .meta-company {
+        color: $book-slate;
+    }
+
+    .meta-year {
+        color: $text-muted;
+    }
+}
+
+.card__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+    margin-top: auto;
+}
+
+.tech-badge {
+    background: rgba($book-blue, 0.12);
+    color: darken($book-blue, 15%);
+    border: 1px solid rgba($book-blue, 0.2);
+    border-radius: $radius-full;
+    padding: $spacing-1 $spacing-2;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    font-family: $font-family-mono;
+
+    &.tech-more {
+        background: rgba($book-slate, 0.1);
+        color: $text-muted;
+        border-color: rgba($book-slate, 0.15);
+    }
+}
+
+.card__actions {
+    display: flex;
+    gap: $spacing-2;
+    padding-top: $spacing-3;
+    border-top: 1px solid rgba($book-sand, 0.8);
+    flex-wrap: wrap;
+}
+
+.card__btn {
+    @include flex-center;
+    gap: $spacing-1;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all $transition-fast;
+    border: 1px solid transparent;
+
+    &--repo {
+        background: rgba($text-dark, 0.06);
+        color: $text-dark;
+        border-color: rgba($text-dark, 0.12);
+
+        &:hover {
+            background: $text-dark;
+            color: $white;
+        }
+    }
+
+    &--demo {
+        background: rgba($primary, 0.1);
+        color: $primary;
+        border-color: rgba($primary, 0.2);
+
+        &:hover {
+            background: $primary;
+            color: $white;
+            box-shadow: $shadow-glow;
+        }
+    }
+
+    &--details {
+        background: rgba($secondary, 0.1);
+        color: darken($secondary, 10%);
+        border-color: rgba($secondary, 0.2);
+        margin-left: auto;
+
+        &:hover {
+            background: $secondary;
+            color: $white;
+        }
+    }
+}

@@ -1,0 +1,98 @@
+<section class="about-page section-padding" aria-label="À propos">
+    <div class="container">
+
+        <!-- Header -->
+        <h1 class="section-title">À <span>Propos</span></h1>
+        <p class="section-subtitle">Développeur passionné, toujours en quête d'excellence technique.</p>
+
+        <!-- Bio + Photo -->
+        <div class="about-hero">
+            <div class="about-avatar animate-fade-up">
+                <div class="avatar-frame">
+                    <span class="avatar-text">KJP</span>
+                </div>
+                <div class="avatar-badge">
+                    <span>🇹🇬</span> Lomé, Togo
+                </div>
+            </div>
+
+            <div class="about-bio animate-fade-up delay-200">
+                <h2 class="bio-name">PAKOU Komi Juste</h2>
+                <p class="bio-title">Développeur Backend &amp; Team Lead</p>
+                <p class="bio-text">
+                    Développeur passionné avec une expertise solide en architecture backend modulaire,
+                    APIs REST sécurisées et déploiement d'applications performantes.
+                    Je maîtrise l'écosystème Java/Spring Boot et contribue à des projets ambitieux
+                    tels que le Titan Marketplace — une plateforme multi-services innovante.
+                </p>
+                <p class="bio-text">
+                    Fort de mon expérience en tant que Team Lead, je suis capable de guider
+                    des équipes techniques tout en maintenant une haute qualité de code.
+                    Toujours curieux, je reste à l'affût des dernières tendances en DevOps et
+                    architecture logicielle.
+                </p>
+                <div class="bio-actions">
+                    <a href="/assets/cv-pakou-juste.pdf" download class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Télécharger CV
+                    </a>
+                    <a routerLink="/contact" class="btn-outline">Me Contacter</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-section animate-fade-up">
+            <h2 class="skills-title">Compétences Techniques</h2>
+            <div class="skills-filter">
+                @for (cat of categories; track cat) {
+                <button class="filter-btn" [class.active]="activeCategory === cat" (click)="setCategory(cat)">
+                    {{ cat }}
+                </button>
+                }
+            </div>
+            <div class="skills-bars">
+                @for (skill of filteredSkills; track skill.name) {
+                <div class="skill-bar animate-fade-up">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name">{{ skill.name }}</span>
+                        <span class="skill-bar__level">{{ skill.level }}%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" [style.width.%]="skill.level"></div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline animate-fade-up">
+            <h2 class="timeline-title">Expériences Professionnelles</h2>
+            <div class="timeline__container">
+                @for (exp of experiences; track exp.company; let i = $index) {
+                <div class="timeline__item" [class.timeline__item--alt]="i % 2 !== 0">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__card">
+                        <div class="timeline__period">{{ exp.period }}</div>
+                        <h3 class="timeline__role">{{ exp.role }}</h3>
+                        <p class="timeline__company">🏢 {{ exp.company }} — {{ exp.location }}</p>
+                        <p class="timeline__desc">{{ exp.description }}</p>
+                        <div class="timeline__techs">
+                            @for (tech of exp.techs; track tech) {
+                            <span class="tech-badge">{{ tech }}</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,158 @@
+<section class="projects-page section-padding" aria-label="Projets">
+    <div class="container">
+
+        <h1 class="section-title">Mes <span>Projets</span></h1>
+        <p class="section-subtitle">Projets GitHub, GitLab et réalisations personnelles.</p>
+
+        <!-- Filters -->
+        <div class="filters-bar">
+            <!-- Search -->
+            <div class="search-wrap">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" class="search-input" placeholder="Rechercher un projet..."
+                    [(ngModel)]="filter.search" (ngModelChange)="onSearch()" id="project-search"
+                    aria-label="Rechercher un projet">
+            </div>
+
+            <!-- Category filters -->
+            <div class="filter-group">
+                @for (cat of categories; track cat) {
+                <button class="filter-chip" [class.active]="filter.category === cat" (click)="setCategory(cat)">
+                    {{ cat === 'all' ? '🔵 Tous' : cat }}
+                </button>
+                }
+            </div>
+
+            <!-- Source filters -->
+            <div class="filter-group">
+                <button class="filter-chip" [class.active]="filter.source === 'all'" (click)="setSource('all')">📦
+                    Toutes sources</button>
+                <button class="filter-chip" [class.active]="filter.source === 'github'" (click)="setSource('github')">⭐
+                    GitHub</button>
+                <button class="filter-chip" [class.active]="filter.source === 'gitlab'" (click)="setSource('gitlab')">🦊
+                    GitLab</button>
+                <button class="filter-chip" [class.active]="filter.source === 'manual'" (click)="setSource('manual')">📌
+                    Featured</button>
+            </div>
+
+            <div class="filters-actions">
+                <button class="btn-reset" (click)="resetFilters()">Réinitialiser</button>
+                <button class="btn-refresh" (click)="refresh()" title="Rafraîchir depuis la source">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10" />
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results count -->
+        <div class="results-meta">
+            <span>{{ filteredProjects.length }} projet(s) trouvé(s)</span>
+        </div>
+
+        <!-- Loading state -->
+        @if (loading) {
+        <div class="loading-grid">
+            @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="skeleton-card">
+                <div class="skeleton" style="height: 24px; width: 60%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 14px; width: 90%; margin-bottom: 8px;"></div>
+                <div class="skeleton" style="height: 14px; width: 75%; margin-bottom: 16px;"></div>
+                <div style="display:flex; gap: 8px;">
+                    <div class="skeleton" style="height: 24px; width: 60px;"></div>
+                    <div class="skeleton" style="height: 24px; width: 80px;"></div>
+                </div>
+            </div>
+            }
+        </div>
+        } @else if (filteredProjects.length === 0) {
+        <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3>Aucun projet trouvé</h3>
+            <p>Essayez d'autres filtres ou <button class="link-btn" (click)="resetFilters()">réinitialisez la
+                    recherche</button>.</p>
+        </div>
+        } @else {
+        <div class="projects-grid">
+            @for (project of filteredProjects; track project.id) {
+            <app-project-card [project]="project" (viewDetails)="openModal($event)" />
+            }
+        </div>
+        }
+
+    </div>
+</section>
+
+<!-- Project details modal -->
+@if (showModal && selectedProject) {
+<div class="modal-overlay" (click)="closeModal()" role="dialog" aria-modal="true"
+    [attr.aria-label]="selectedProject.name" tabindex="-1">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <button class="modal__close" (click)="closeModal()" aria-label="Fermer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+
+        <div class="modal__header">
+            <h2 class="modal__title">{{ selectedProject.name }}</h2>
+            <div class="modal__badges">
+                <span class="badge" [ngClass]="'badge-' + selectedProject.source">
+                    {{ selectedProject.source === 'github' ? '⭐ GitHub' : selectedProject.source === 'gitlab' ? '🦊
+                    GitLab' : selectedProject.source === 'both' ? '⭐🦊 Both' : '📌 Featured' }}
+                </span>
+                @if (selectedProject.featured) { <span class="badge badge-secondary">⭐ Featured</span> }
+            </div>
+        </div>
+
+        <p class="modal__desc">{{ selectedProject.description }}</p>
+
+        @if (selectedProject.highlights?.length) {
+        <ul class="modal__highlights">
+            @for (h of selectedProject.highlights; track h) {
+            <li>✅ {{ h }}</li>
+            }
+        </ul>
+        }
+
+        <div class="modal__techs">
+            @for (tech of selectedProject.technologies; track tech) {
+            <span class="tech-badge">{{ tech }}</span>
+            }
+        </div>
+
+        @if (selectedProject.role || selectedProject.company) {
+        <p class="modal__meta">
+            @if (selectedProject.role) { <strong>{{ selectedProject.role }}</strong> }
+            @if (selectedProject.company) { — {{ selectedProject.company }} }
+            @if (selectedProject.year) { ({{ selectedProject.year }}) }
+        </p>
+        }
+
+        <div class="modal__actions">
+            @if (selectedProject.githubUrl || selectedProject.repoUrl) {
+            <a [href]="selectedProject.githubUrl || selectedProject.repoUrl" target="_blank" rel="noopener"
+                class="btn-primary">
+                Voir le Code
+            </a>
+            }
+            @if (selectedProject.gitlabUrl) {
+            <a [href]="selectedProject.gitlabUrl" target="_blank" rel="noopener" class="btn-outline">
+                GitLab
+            </a>
+            }
+            @if (selectedProject.demoUrl) {
+            <a [href]="selectedProject.demoUrl" target="_blank" rel="noopener" class="btn-outline">
+                Voir la Démo 🚀
+            </a>
+            }
+        </div>
+    </div>
+</div>
+}

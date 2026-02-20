@@ -1,0 +1,207 @@
+// =============================================================================
+// header.component.scss
+// =============================================================================
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-sticky;
+    height: $header-height;
+    transition: all $transition-base;
+
+    &.scrolled {
+        @include glass(0.85);
+        box-shadow: $shadow-md;
+    }
+
+    &__inner {
+        @include flex-between;
+        @include container;
+        height: 100%;
+        gap: $spacing-6;
+    }
+
+    &__logo {
+        @include flex-center;
+        gap: $spacing-3;
+        text-decoration: none;
+        flex-shrink: 0;
+
+        .logo-icon {
+            font-size: $font-size-xl;
+            font-weight: $font-weight-black;
+            font-family: $font-family-mono;
+            color: $primary;
+            background: rgba($primary, 0.1);
+            padding: $spacing-1 $spacing-2;
+            border-radius: $radius-sm;
+        }
+
+        .logo-text {
+            font-size: $font-size-lg;
+            color: $text-dark;
+
+            strong {
+                color: $primary;
+            }
+        }
+    }
+
+    &__nav {
+        @include max-md {
+            display: none;
+        }
+    }
+
+    &__cta {
+        @include max-md {
+            display: none;
+        }
+
+        padding: $spacing-2 $spacing-5;
+        font-size: $font-size-sm;
+    }
+
+    &__burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: $spacing-2;
+        cursor: pointer;
+        background: none;
+        border: none;
+
+        @include max-md {
+            display: flex;
+        }
+
+        span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: $text-dark;
+            border-radius: $radius-full;
+            transition: all $transition-base;
+        }
+
+        &.open {
+            span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            span:nth-child(2) {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+
+            span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+        }
+    }
+}
+
+// Desktop nav
+.nav-list {
+    display: flex;
+    gap: $spacing-1;
+    align-items: center;
+}
+
+.nav-link {
+    display: block;
+    padding: $spacing-2 $spacing-3;
+    color: $text-light;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: $primary;
+        border-radius: $radius-full;
+        transform: translateX(-50%);
+        transition: width $transition-base;
+    }
+
+    &:hover {
+        color: $primary;
+        background: rgba($primary, 0.07);
+
+        &::after {
+            width: 60%;
+        }
+    }
+
+    &.active {
+        color: $primary;
+        font-weight: $font-weight-semibold;
+
+        &::after {
+            width: 60%;
+        }
+    }
+}
+
+// Mobile nav overlay
+.mobile-nav {
+    display: none;
+    position: fixed;
+    inset: $header-height 0 0 0;
+    background: rgba($background, 0.97);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: $spacing-8 $spacing-6;
+    transform: translateX(100%);
+    transition: transform $transition-slow;
+
+    @include max-md {
+        display: flex;
+
+        &.open {
+            transform: translateX(0);
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+    }
+
+    &__link {
+        display: block;
+        padding: $spacing-4 $spacing-4;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-medium;
+        color: $text-dark;
+        text-decoration: none;
+        border-radius: $radius-lg;
+        transition: all $transition-fast;
+        border-left: 3px solid transparent;
+
+        &:hover,
+        &.active {
+            color: $primary;
+            background: rgba($primary, 0.07);
+            border-left-color: $primary;
+        }
+    }
+
+    .mobile-cta {
+        margin-top: $spacing-4;
+        justify-content: center;
+        font-size: $font-size-base;
+    }
+}

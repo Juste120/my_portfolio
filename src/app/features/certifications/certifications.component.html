@@ -1,0 +1,130 @@
+<section class="certifications-page section-padding" aria-label="Certifications">
+    <div class="container">
+
+        <h1 class="section-title">Mes <span>Certifications</span></h1>
+        <p class="section-subtitle">Badges et certifications professionnelles validées par Credly.</p>
+
+        <!-- Stats -->
+        <div class="cert-stats">
+            <div class="stat-pill">
+                <span class="stat-num">{{ stats.total }}</span>
+                <span class="stat-lbl">Total</span>
+            </div>
+            <div class="stat-pill active">
+                <span class="stat-num">{{ stats.active }}</span>
+                <span class="stat-lbl">Actives</span>
+            </div>
+            <div class="stat-pill this-year">
+                <span class="stat-num">{{ stats.thisYear }}</span>
+                <span class="stat-lbl">Cette année</span>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="cert-filters">
+            <div class="search-wrap">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" class="search-input" placeholder="Rechercher une certification..."
+                    [(ngModel)]="filter.search" (ngModelChange)="onSearch()" id="cert-search" aria-label="Rechercher">
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <button class="filter-chip" [class.active]="filter.status === 'all'"
+                        (click)="setStatus('all')">Tous</button>
+                    <button class="filter-chip active-chip" [class.active]="filter.status === 'active'"
+                        (click)="setStatus('active')">✅ Actives</button>
+                    <button class="filter-chip" [class.active]="filter.status === 'expired'"
+                        (click)="setStatus('expired')">⏰ Expirées</button>
+                </div>
+
+                <select class="issuer-select" [(ngModel)]="filter.issuer" (ngModelChange)="applyFilters()"
+                    aria-label="Filtrer par émetteur">
+                    @for (issuer of issuers; track issuer) {
+                    <option [value]="issuer">{{ issuer === 'all' ? 'Tous les émetteurs' : issuer }}</option>
+                    }
+                </select>
+
+                <button class="btn-refresh" (click)="refresh()" title="Rafraîchir">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10" />
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <p class="results-meta">{{ filteredCerts.length }} certification(s)</p>
+
+        <!-- Loading -->
+        @if (loading) {
+        <div class="certs-grid">
+            @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="skeleton-card">
+                <div class="skeleton" style="width:80px;height:80px;border-radius:50%;margin: 0 auto 16px;"></div>
+                <div class="skeleton" style="height:16px;width:80%;margin: 0 auto 8px;"></div>
+                <div class="skeleton" style="height:12px;width:60%;margin: 0 auto;"></div>
+            </div>
+            }
+        </div>
+        } @else if (filteredCerts.length === 0) {
+        <div class="empty-state">
+            <div class="empty-icon">🎓</div>
+            <h3>Aucune certification trouvée</h3>
+            <p>Les certifications Credly se récupèrent automatiquement via GitHub Actions.</p>
+            <a href="https://www.credly.com/users/pakou-komi-juste/badges" target="_blank" rel="noopener"
+                class="btn-primary" style="margin-top:16px;display:inline-flex;">
+                Voir sur Credly
+            </a>
+        </div>
+        } @else {
+        <div class="certs-grid">
+            @for (cert of filteredCerts; track cert.id) {
+            <article class="cert-card" [class.expired]="!cert.isActive">
+                <div class="cert-card__status">
+                    @if (cert.isActive) {
+                    <span class="status-dot active"></span>
+                    } @else {
+                    <span class="status-dot expired"></span>
+                    }
+                    <span class="status-label">{{ cert.isActive ? 'Active' : 'Expirée' }}</span>
+                </div>
+
+                <div class="cert-card__img">
+                    @if (cert.imageUrl) {
+                    <img [src]="cert.imageUrl" [alt]="cert.name + ' badge'" loading="lazy">
+                    } @else {
+                    <div class="cert-placeholder">🏆</div>
+                    }
+                </div>
+
+                <div class="cert-card__body">
+                    <h3 class="cert-card__name">{{ cert.name }}</h3>
+                    <p class="cert-card__issuer">{{ cert.issuer }}</p>
+                    <p class="cert-card__date">Obtenu le {{ formatDate(cert.issuedAt) }}</p>
+                    @if (cert.expiresAt) {
+                    <p class="cert-card__expiry">Expire le {{ formatDate(cert.expiresAt) }}</p>
+                    }
+                </div>
+
+                <div class="cert-card__actions">
+                    <a [href]="cert.badgeUrl" target="_blank" rel="noopener" class="cert-btn">
+                        Voir le Badge
+                    </a>
+                    @if (cert.verifyUrl) {
+                    <a [href]="cert.verifyUrl" target="_blank" rel="noopener" class="cert-btn cert-btn--verify">
+                        ✅ Vérifier
+                    </a>
+                    }
+                </div>
+            </article>
+            }
+        </div>
+        }
+
+    </div>
+</section>

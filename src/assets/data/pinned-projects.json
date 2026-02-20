@@ -1,0 +1,88 @@
+[
+    {
+        "name": "Titan Marketplace",
+        "description": "Marketplace multi-services avec architecture Spring Modulith",
+        "repoUrl": "https://github.com/pakoujuste/titan-marketplace",
+        "demoUrl": null,
+        "featured": true,
+        "pinned": true,
+        "order": 1,
+        "technologies": [
+            "Java",
+            "Spring Boot",
+            "Spring Modulith",
+            "PostgreSQL",
+            "Docker",
+            "Angular"
+        ],
+        "category": "Full-Stack",
+        "highlights": [
+            "Architecture modulaire avec Spring Modulith",
+            "4 modules: Food, Coursier, Event, Immobilier",
+            "API REST sécurisées avec JWT",
+            "Chat en temps réel"
+        ],
+        "year": 2025,
+        "role": "Backend Developer & Team Lead",
+        "company": "NITCH-CORP"
+    },
+    {
+        "name": "Titan Tunes",
+        "description": "Plateforme de streaming musical pour artistes africains",
+        "repoUrl": "https://github.com/pakoujuste/titan-tunes",
+        "demoUrl": null,
+        "featured": true,
+        "pinned": true,
+        "order": 2,
+        "technologies": [
+            "Java",
+            "Spring Boot",
+            "Angular",
+            "PostgreSQL",
+            "MinIO"
+        ],
+        "category": "Full-Stack",
+        "year": 2025,
+        "role": "Full-Stack Developer",
+        "company": "NITCH-CORP"
+    },
+    {
+        "name": "Togo Explore",
+        "description": "Plateforme de gestion du tourisme au Togo",
+        "repoUrl": "https://github.com/pakoujuste/togo-explore",
+        "demoUrl": null,
+        "featured": true,
+        "pinned": true,
+        "order": 3,
+        "technologies": [
+            "Java",
+            "Spring Boot",
+            "Angular",
+            "PrimeNG",
+            "PostgreSQL"
+        ],
+        "category": "Full-Stack",
+        "year": 2024,
+        "role": "Full-Stack Developer",
+        "company": "Odda Technology SARL"
+    },
+    {
+        "name": "Social Network Platform",
+        "description": "Réseau social avec Flutter et Spring Boot",
+        "repoUrl": "https://github.com/pakoujuste/social-network",
+        "demoUrl": null,
+        "featured": false,
+        "pinned": true,
+        "order": 4,
+        "technologies": [
+            "Java",
+            "Spring Boot",
+            "Flutter",
+            "MySQL"
+        ],
+        "category": "Mobile",
+        "year": 2023,
+        "role": "Full-Stack Developer",
+        "company": "KOF Corporation"
+    }
+]

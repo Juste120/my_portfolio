@@ -1,0 +1,310 @@
+// =============================================================================
+// home.component.scss
+// =============================================================================
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// We need this in the component to call inline
+.home-page {
+    overflow: hidden;
+}
+
+// Hero
+.hero {
+    position: relative;
+    min-height: 100vh;
+
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        min-height: 100vh;
+        padding-top: $header-height;
+        gap: $spacing-12;
+
+        @include max-md {
+            grid-template-columns: 1fr;
+            text-align: center;
+            padding-top: calc(#{$header-height} + #{$spacing-8});
+            gap: $spacing-8;
+        }
+    }
+
+    &__greeting {
+        font-size: $font-size-lg;
+        color: $text-light;
+        margin-bottom: $spacing-3;
+        font-weight: $font-weight-medium;
+    }
+
+    &__name {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: $font-weight-black;
+        line-height: 1.05;
+        margin-bottom: $spacing-4;
+
+        .name-first {
+            color: $text-dark;
+        }
+
+        .name-last {
+            @include text-gradient($primary, $secondary);
+        }
+    }
+
+    &__title {
+        font-size: clamp($font-size-xl, 3vw, $font-size-3xl);
+        font-weight: $font-weight-medium;
+        color: $text-light;
+        margin-bottom: $spacing-5;
+
+        .highlight {
+            color: $primary;
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    &__desc {
+        font-size: $font-size-lg;
+        color: $text-light;
+        line-height: $line-height-relaxed;
+        max-width: 520px;
+        margin-bottom: $spacing-8;
+
+        @include max-md {
+            margin: 0 auto $spacing-8;
+        }
+    }
+
+    &__ctas {
+        display: flex;
+        gap: $spacing-4;
+        flex-wrap: wrap;
+
+        @include max-md {
+            justify-content: center;
+        }
+    }
+
+    &__socials {
+        display: flex;
+        gap: $spacing-3;
+        margin-top: $spacing-6;
+        flex-wrap: wrap;
+
+        @include max-md {
+            justify-content: center;
+        }
+    }
+
+    &__avatar {
+        @include flex-center;
+        flex-direction: column;
+        position: relative;
+
+        @include max-md {
+            order: -1;
+        }
+    }
+
+    &__scroll {
+        position: absolute;
+        bottom: $spacing-8;
+        left: 50%;
+        transform: translateX(-50%);
+        @include flex-center;
+        flex-direction: column;
+        gap: $spacing-2;
+        color: $text-muted;
+        font-size: $font-size-xs;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+}
+
+// Scroll dot animation
+.scroll-dot {
+    width: 6px;
+    height: 6px;
+    background: $primary;
+    border-radius: $radius-full;
+    animation: float 2s ease-in-out infinite;
+}
+
+// Social pill
+.social-pill {
+    @include flex-center;
+    gap: $spacing-1;
+    padding: $spacing-2 $spacing-4;
+    background: rgba($primary, 0.08);
+    color: $primary;
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $primary;
+        color: $white;
+        transform: translateY(-2px);
+        box-shadow: $shadow-glow;
+    }
+}
+
+// Avatar
+.avatar-ring {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 4px;
+    background: $gradient-primary;
+    box-shadow: 0 0 60px rgba($primary, 0.25);
+    animation: float 6s ease-in-out infinite;
+}
+
+.avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: $gradient-hero;
+    @include flex-center;
+    overflow: hidden;
+    border: 3px solid rgba($white, 0.6);
+}
+
+.avatar-initials {
+    font-size: 3rem;
+    font-weight: $font-weight-black;
+    @include text-gradient($primary, $secondary);
+    font-family: $font-family-mono;
+}
+
+// Floating skill orbs
+.avatar-skills {
+    position: absolute;
+    inset: -20px;
+    pointer-events: none;
+}
+
+.skill-orb {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    @include flex-center;
+    font-size: 1.3rem;
+    border: 1px solid;
+    backdrop-filter: blur(8px);
+    box-shadow: $shadow-sm;
+
+    &:nth-child(1) {
+        top: 5%;
+        left: 10%;
+    }
+
+    &:nth-child(2) {
+        top: 5%;
+        right: 10%;
+    }
+
+    &:nth-child(3) {
+        top: 45%;
+        left: -5%;
+    }
+
+    &:nth-child(4) {
+        top: 45%;
+        right: -5%;
+    }
+
+    &:nth-child(5) {
+        bottom: 5%;
+        left: 15%;
+    }
+
+    &:nth-child(6) {
+        bottom: 5%;
+        right: 15%;
+    }
+}
+
+// Stats
+.stats-section {
+    @include section-padding;
+    background: $bg-alt;
+}
+
+.stats-grid {
+    @include grid-auto-fit(180px);
+    text-align: center;
+}
+
+.stat-card {
+    background: $white;
+    border-radius: $radius-xl;
+    padding: $spacing-8 $spacing-6;
+    box-shadow: $shadow-md;
+    transition: transform $transition-base;
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+}
+
+.stat-value {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-black;
+    @include text-gradient($primary, $secondary);
+    line-height: 1;
+    margin-bottom: $spacing-2;
+}
+
+.stat-label {
+    font-size: $font-size-sm;
+    color: $text-light;
+    font-weight: $font-weight-medium;
+}
+
+// Skills preview
+.skills-preview {
+    @include section-padding;
+    background: $background;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-4;
+    justify-content: center;
+    margin-top: $spacing-6;
+}
+
+.skill-pill {
+    @include flex-center;
+    gap: $spacing-3;
+    padding: $spacing-4 $spacing-6;
+    background: $white;
+    border-radius: $radius-xl;
+    border: 1px solid rgba($book-sand, 0.8);
+    box-shadow: $shadow-sm;
+    transition: all $transition-base;
+    cursor: default;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-md;
+        border-color: rgba($primary, 0.3);
+    }
+
+    .skill-icon {
+        font-size: 1.5rem;
+    }
+
+    .skill-name {
+        font-weight: $font-weight-semibold;
+        color: $text-dark;
+        font-size: $font-size-sm;
+    }
+}
