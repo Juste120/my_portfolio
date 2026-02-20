@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
     private readonly projectsService = inject(ProjectsService);
 
     totalProjects = 0;
-    totalYears = new Date().getFullYear() - 2021;
+    // Première expérience pro : Juin 2023 (KOF Corporation)
+    totalYears = Math.floor((Date.now() - new Date('2023-06-01').getTime()) / (1000 * 60 * 60 * 24 * 365));
+    featuredProjects = 10;
 
     skills = [
         { name: 'Java', icon: '☕', color: '#f89820' },
