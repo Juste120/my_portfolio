@@ -12,9 +12,7 @@
     "fetch:gitlab": "node scripts/fetch-gitlab-projects.js",
     "fetch:credly": "node scripts/fetch-credly-badges.js",
     "merge:data": "node scripts/merge-projects.js",
-    "update:all": "npm run fetch:github && npm run fetch:gitlab && npm run fetch:credly && npm run merge:data",
-    "prebuild": "npm run update:all",
-    "prebuild:prod": "npm run update:all"
+    "update:all": "npm run fetch:github && npm run fetch:gitlab && npm run fetch:credly && npm run merge:data"
   },
   "private": true,
   "dependencies": {

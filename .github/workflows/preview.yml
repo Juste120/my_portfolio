@@ -1,4 +1,4 @@
-name: Deploy Preview to Vercel
+name: 🔍 Deploy Preview to Vercel
 
 on:
   pull_request:
@@ -8,34 +8,47 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm ci
 
-      - name: Fetch data
-        run: npm run update:all
+      - name: 🐙 Fetch GitHub repositories
+        run: node scripts/fetch-github-repos.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🦊 Fetch GitLab projects
+        run: node scripts/fetch-gitlab-projects.js
+        continue-on-error: true
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           GITLAB_USERNAME: ${{ secrets.GITLAB_USERNAME }}
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+
+      - name: 🏆 Fetch Credly certifications
+        run: node scripts/fetch-credly-badges.js
+        continue-on-error: true
+        env:
           CREDLY_USER_ID: ${{ secrets.CREDLY_USER_ID }}
 
-      - name: Build Angular
-        run: npm run build:prod
+      - name: 🔀 Merge all data
+        run: node scripts/merge-projects.js
 
-      - name: Install Vercel CLI
+      - name: 🏗️ Build Angular (production)
+        run: npx ng build --configuration production
+
+      - name: 🔧 Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Vercel Environment Information
+      - name: 📋 Pull Vercel Environment
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Preview to Vercel
+      - name: 🔍 Deploy Preview to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
