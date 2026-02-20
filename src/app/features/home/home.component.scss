@@ -228,6 +228,21 @@
         bottom: 5%;
         right: 15%;
     }
+
+    &:nth-child(7) {
+        top: 25%;
+        left: 2%;
+    }
+
+    &:nth-child(8) {
+        bottom: 25%;
+        right: 2%;
+    }
+
+    &:nth-child(9) {
+        top: 15%;
+        left: 40%;
+    }
 }
 
 // Stats
@@ -273,12 +288,35 @@
     background: $background;
 }
 
+.skills-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-10;
+    margin-top: $spacing-12;
+
+    @include max-md {
+        grid-template-columns: 1fr;
+        gap: $spacing-8;
+    }
+}
+
+.skill-category {
+    .category-name {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $primary;
+        margin-bottom: $spacing-4;
+        padding-left: $spacing-2;
+        border-left: 3px solid $primary;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+}
+
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-4;
-    justify-content: center;
-    margin-top: $spacing-6;
+    gap: $spacing-3;
 }
 
 .skill-pill {

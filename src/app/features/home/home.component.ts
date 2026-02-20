@@ -17,18 +17,41 @@ import { ProjectsService } from '../../core/services/projects.service';
 export class HomeComponent implements OnInit {
     private readonly projectsService = inject(ProjectsService);
 
-    totalProjects = 0;
+    totalProjects = 10;
     totalYears = 2;
-    featuredProjects = 10;
+    featuredProjects = 2;
 
-    skills = [
-        { name: 'Java', icon: '☕', color: '#f89820' },
-        { name: 'Spring Boot', icon: '🍃', color: '#6db33f' },
-        { name: 'Angular', icon: '🅰', color: '#dd0031' },
-        { name: 'PostgreSQL', icon: '🐘', color: '#336791' },
-        { name: 'Docker', icon: '🐳', color: '#2496ed' },
-        { name: 'GitLab CI', icon: '🦊', color: '#fc6d26' }
+    skillCategories = [
+        {
+            name: 'Backend',
+            skills: [
+                { name: 'Java 17 / 21', icon: '☕', color: '#f89820' },
+                { name: 'Spring Boot 3', icon: '🍃', color: '#6db33f' },
+                { name: 'Spring AI', icon: '🤖', color: '#00a67e' },
+                { name: 'Quarkus', icon: '🚀', color: '#4695eb' }
+            ]
+        },
+        {
+            name: 'Frontend',
+            skills: [
+                { name: 'Angular', icon: '🅰', color: '#dd0031' },
+                { name: 'TypeScript', icon: 'TS', color: '#3178c6' }
+            ]
+        },
+        {
+            name: 'DevOps',
+            skills: [
+                { name: 'Docker', icon: '🐳', color: '#2496ed' },
+                { name: 'Kubernetes', icon: '☸️', color: '#326ce5' },
+                { name: 'GitHub Actions', icon: '🐙', color: '#2088ff' }
+            ]
+        }
     ];
+
+    // For the floating background or simplified list
+    get allSkills() {
+        return this.skillCategories.flatMap(c => c.skills);
+    }
 
     ngOnInit(): void {
         this.projectsService.loadProjects().subscribe(projects => {

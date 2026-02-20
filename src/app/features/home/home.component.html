@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="avatar-skills">
-                        @for (skill of skills; track skill.name; let i = $index) {
+                        @for (skill of allSkills; track skill.name; let i = $index) {
                         <div class="skill-orb animate-float" [style.animation-delay]="(i * 0.3) + 's'"
                             [style.background]="'rgba(' + hexToRgb(skill.color) + ', 0.15)'"
                             [style.border-color]="skill.color + '40'" [title]="skill.name">
@@ -90,7 +90,7 @@
                     <div class="stat-label">Années d'expérience</div>
                 </div>
                 <div class="stat-card animate-fade-up delay-100">
-                    <div class="stat-value">{{ totalProjects || '10' }}+</div>
+                    <div class="stat-value">{{ totalProjects }}+</div>
                     <div class="stat-label">Projets réalisés</div>
                 </div>
                 <div class="stat-card animate-fade-up delay-200">
@@ -110,11 +110,18 @@
         <div class="container">
             <h2 class="section-title">Stack <span>Technique</span></h2>
             <p class="section-subtitle">Technologies maîtrisées au quotidien pour construire des solutions robustes.</p>
-            <div class="skills-grid">
-                @for (skill of skills; track skill.name) {
-                <div class="skill-pill animate-bounce-in">
-                    <span class="skill-icon">{{ skill.icon }}</span>
-                    <span class="skill-name">{{ skill.name }}</span>
+            <div class="skills-categories">
+                @for (category of skillCategories; track category.name) {
+                <div class="skill-category animate-fade-up">
+                    <h3 class="category-name">{{ category.name }}</h3>
+                    <div class="skills-grid">
+                        @for (skill of category.skills; track skill.name) {
+                        <div class="skill-pill animate-bounce-in">
+                            <span class="skill-icon">{{ skill.icon }}</span>
+                            <span class="skill-name">{{ skill.name }}</span>
+                        </div>
+                        }
+                    </div>
                 </div>
                 }
             </div>
