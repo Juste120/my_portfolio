@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-const GITHUB_USERNAME = 'Juste120';
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'Juste120';
 const OUTPUT_FILE = path.join(__dirname, '../src/assets/data/github-repos.json');
 
 function fetchGitHubRepos() {

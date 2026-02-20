@@ -16,9 +16,9 @@ export class FooterComponent {
     currentYear = new Date().getFullYear();
 
     socialLinks = [
-        { label: 'GitHub', url: 'https://github.com/pakoujuste', icon: 'github' },
-        { label: 'GitLab', url: 'https://gitlab.com/pakoujuste', icon: 'gitlab' },
-        { label: 'LinkedIn', url: 'https://linkedin.com/in/pakou-juste', icon: 'linkedin' },
+        { label: 'GitHub', url: 'https://github.com/Juste120', icon: 'github' },
+        { label: 'GitLab', url: 'https://gitlab.com/Juste120', icon: 'gitlab' },
+        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pakou-komi-juste-941536314/', icon: 'linkedin' },
         { label: 'Credly', url: 'https://www.credly.com/users/pakou-komi-juste/badges', icon: 'credly' }
     ];
 

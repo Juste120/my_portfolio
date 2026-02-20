@@ -18,8 +18,7 @@ export class HomeComponent implements OnInit {
     private readonly projectsService = inject(ProjectsService);
 
     totalProjects = 0;
-    // Première expérience pro : Juin 2023 (KOF Corporation)
-    totalYears = Math.floor((Date.now() - new Date('2023-06-01').getTime()) / (1000 * 60 * 60 * 24 * 365));
+    totalYears = 2;
     featuredProjects = 10;
 
     skills = [

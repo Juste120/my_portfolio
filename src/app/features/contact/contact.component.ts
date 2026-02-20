@@ -33,9 +33,9 @@ export class ContactComponent {
     status: FormStatus = 'idle';
 
     socialLinks = [
-        { label: 'GitHub', url: 'https://github.com/pakoujuste', icon: '⭐', color: '#24292e' },
-        { label: 'GitLab', url: 'https://gitlab.com/pakoujuste', icon: '🦊', color: '#fc6d26' },
-        { label: 'LinkedIn', url: 'https://linkedin.com/in/pakou-juste', icon: '💼', color: '#0077b5' },
+        { label: 'GitHub', url: 'https://github.com/Juste120', icon: '⭐', color: '#24292e' },
+        { label: 'GitLab', url: 'https://gitlab.com/Juste120', icon: '🦊', color: '#fc6d26' },
+        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pakou-komi-juste-941536314/', icon: '💼', color: '#0077b5' },
         { label: 'Credly', url: 'https://www.credly.com/users/pakou-komi-juste/badges', icon: '🏆', color: '#ff6b35' },
         { label: 'Email', url: 'mailto:pakoujuste2019@gmail.com', icon: '📧', color: '#4A9B8E' }
     ];
