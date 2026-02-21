@@ -10,10 +10,6 @@
                 <span class="stat-num">{{ stats.total }}</span>
                 <span class="stat-lbl">Total</span>
             </div>
-            <div class="stat-pill active">
-                <span class="stat-num">{{ stats.active }}</span>
-                <span class="stat-lbl">Actives</span>
-            </div>
             <div class="stat-pill this-year">
                 <span class="stat-num">{{ stats.thisYear }}</span>
                 <span class="stat-lbl">Cette année</span>
@@ -34,12 +30,7 @@
 
             <div class="filter-row">
                 <div class="filter-group">
-                    <button class="filter-chip" [class.active]="filter.status === 'all'"
-                        (click)="setStatus('all')">Tous</button>
-                    <button class="filter-chip active-chip" [class.active]="filter.status === 'active'"
-                        (click)="setStatus('active')">✅ Actives</button>
-                    <button class="filter-chip" [class.active]="filter.status === 'expired'"
-                        (click)="setStatus('expired')">⏰ Expirées</button>
+                    <button class="filter-chip active" (click)="setStatus('all')">Toutes les Certifications</button>
                 </div>
 
                 <select class="issuer-select" [(ngModel)]="filter.issuer" (ngModelChange)="applyFilters()"
@@ -84,15 +75,7 @@
         } @else {
         <div class="certs-grid">
             @for (cert of filteredCerts; track cert.id) {
-            <article class="cert-card" [class.expired]="!cert.isActive">
-                <div class="cert-card__status">
-                    @if (cert.isActive) {
-                    <span class="status-dot active"></span>
-                    } @else {
-                    <span class="status-dot expired"></span>
-                    }
-                    <span class="status-label">{{ cert.isActive ? 'Active' : 'Expirée' }}</span>
-                </div>
+            <article class="cert-card">
 
                 <div class="cert-card__img">
                     @if (cert.imageUrl) {
@@ -105,10 +88,7 @@
                 <div class="cert-card__body">
                     <h3 class="cert-card__name">{{ cert.name }}</h3>
                     <p class="cert-card__issuer">{{ cert.issuer }}</p>
-                    <p class="cert-card__date">Obtenu le {{ formatDate(cert.issuedAt) }}</p>
-                    @if (cert.expiresAt) {
-                    <p class="cert-card__expiry">Expire le {{ formatDate(cert.expiresAt) }}</p>
-                    }
+                    <p class="cert-card__date">Délivrée le {{ formatDate(cert.issuedAt) }}</p>
                 </div>
 
                 <div class="cert-card__actions">

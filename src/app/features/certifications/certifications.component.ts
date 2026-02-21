@@ -41,7 +41,7 @@ export class CertificationsComponent implements OnInit {
         this.filteredCerts = this.certsService.filterCertifications(this.allCerts, this.filter);
     }
 
-    setStatus(status: 'all' | 'active' | 'expired'): void {
+    setStatus(status: 'all'): void {
         this.filter.status = status;
         this.applyFilters();
     }

@@ -29,10 +29,6 @@
     min-width: 120px;
     border: 1px solid rgba($book-sand, 0.8);
 
-    &.active {
-        border-color: rgba($primary, 0.3);
-    }
-
     &.this-year {
         border-color: rgba($secondary, 0.3);
     }
@@ -195,19 +191,6 @@
         box-shadow: $shadow-xl;
     }
 
-    &.expired {
-        opacity: 0.7;
-        filter: grayscale(0.4);
-    }
-
-    &__status {
-        @include flex-center;
-        gap: $spacing-2;
-        align-self: flex-end;
-        font-size: $font-size-xs;
-        color: $text-muted;
-    }
-
     &__img {
         width: 80px;
         height: 80px;
@@ -245,11 +228,6 @@
         color: $text-muted;
     }
 
-    &__expiry {
-        font-size: $font-size-xs;
-        color: $book-coral;
-    }
-
     &__actions {
         display: flex;
         gap: $spacing-2;
@@ -260,26 +238,6 @@
 
 .cert-placeholder {
     font-size: 3rem;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-
-    &.active {
-        background: $book-mint;
-        box-shadow: 0 0 6px rgba($book-mint, 0.6);
-    }
-
-    &.expired {
-        background: $book-coral;
-    }
-}
-
-.status-label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
 }
 
 .cert-btn {
