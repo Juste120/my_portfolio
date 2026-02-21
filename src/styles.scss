@@ -40,7 +40,7 @@ a {
     transition: color $transition-fast;
 
     &:hover {
-        color: darken($primary, 10%);
+        color: color.scale($primary, $lightness: -10%);
     }
 }
 
@@ -147,25 +147,25 @@ pre {
 
     &.badge-primary {
         background: rgba($primary, 0.12);
-        color: darken($primary, 10%);
+        color: color.scale($primary, $lightness: -10%);
         border: 1px solid rgba($primary, 0.25);
     }
 
     &.badge-secondary {
         background: rgba($secondary, 0.12);
-        color: darken($secondary, 10%);
+        color: color.scale($secondary, $lightness: -10%);
         border: 1px solid rgba($secondary, 0.25);
     }
 
     &.badge-mint {
         background: rgba($book-mint, 0.2);
-        color: darken($book-mint, 20%);
+        color: color.scale($book-mint, $lightness: -20%);
         border: 1px solid rgba($book-mint, 0.35);
     }
 
     &.badge-blue {
         background: rgba($book-blue, 0.15);
-        color: darken($book-blue, 15%);
+        color: color.scale($book-blue, $lightness: -15%);
         border: 1px solid rgba($book-blue, 0.3);
     }
 
@@ -177,7 +177,7 @@ pre {
 
     &.badge-gitlab {
         background: rgba(#FC6D26, 0.1);
-        color: darken(#FC6D26, 15%);
+        color: color.scale(#FC6D26, $lightness: -15%);
         border: 1px solid rgba(#FC6D26, 0.25);
     }
 
