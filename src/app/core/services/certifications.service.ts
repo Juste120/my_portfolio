@@ -3,12 +3,44 @@
 // =============================================================================
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, map } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Certification, CertificationFilter, CertificationStats } from '../../shared/models/certification.model';
 
+const CREDLY_USER_ID = 'b9db7bea-e2e8-4ccb-ade7-a7a4d2379c90';
 const CACHE_KEY = 'portfolio_certifications';
 const CACHE_TTL = 30 * 60 * 1000;
+
+interface AllOriginsResponse {
+    contents: string;
+    status: {
+        http_code: number;
+    };
+}
+
+interface CredlyBadge {
+    id: string;
+    issued_at: string;
+    expires_at: string | null;
+    state: string;
+    badge_template: {
+        name: string;
+        description: string;
+        image_url: string;
+        issuer_id: string;
+    };
+    issuer: {
+        entities: Array<{
+            entity: {
+                name: string;
+            };
+        }>;
+    };
+}
+
+interface CredlyResponse {
+    data: CredlyBadge[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class CertificationsService {
@@ -27,7 +59,15 @@ export class CertificationsService {
         }
 
         this._loading$.next(true);
-        return this.http.get<Certification[]>('assets/data/credly-badges.json').pipe(
+
+        const targetUrl = `https://www.credly.com/users/${CREDLY_USER_ID}/badges.json`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&timestamp=${Date.now()}`;
+
+        return this.http.get<AllOriginsResponse>(proxyUrl).pipe(
+            map(response => {
+                const parsed: CredlyResponse = JSON.parse(response.contents);
+                return this.mapCredlyResponse(parsed.data);
+            }),
             tap(certs => {
                 const sorted = [...certs].sort((a, b) =>
                     new Date(b.issuedAt).getTime() - new Date(a.issuedAt).getTime()
@@ -37,12 +77,41 @@ export class CertificationsService {
                 this._loading$.next(false);
             }),
             catchError(err => {
-                console.warn('Could not load credly-badges.json', err);
+                console.warn('Could not fetch Credly badges dynamicially', err);
+                // Fallback to local assets if proxy fails
+                return this.loadFromAssets();
+            })
+        );
+    }
+
+    private loadFromAssets(): Observable<Certification[]> {
+        return this.http.get<Certification[]>('assets/data/credly-badges.json').pipe(
+            tap(certs => {
+                this._certs$.next(certs);
+                this._loading$.next(false);
+            }),
+            catchError(() => {
                 this._loading$.next(false);
                 this._certs$.next([]);
                 return of([]);
             })
         );
+    }
+
+    private mapCredlyResponse(data: CredlyBadge[]): Certification[] {
+        return data.map(item => ({
+            id: item.id,
+            name: item.badge_template.name,
+            description: item.badge_template.description,
+            issuer: item.issuer.entities[0]?.entity?.name || 'Inconnu',
+            imageUrl: item.badge_template.image_url,
+            badgeUrl: `https://www.credly.com/badges/${item.id}/public_url`,
+            verifyUrl: `https://www.credly.com/badges/${item.id}/public_url`,
+            issuedAt: item.issued_at,
+            expiresAt: item.expires_at || undefined,
+            isActive: item.state === 'active',
+            category: 'Tech' // Default category
+        }));
     }
 
     filterCertifications(certs: Certification[], filter: CertificationFilter): Certification[] {
