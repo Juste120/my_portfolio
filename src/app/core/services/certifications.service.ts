@@ -7,8 +7,8 @@ import { Observable, of, BehaviorSubject, map } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Certification, CertificationFilter, CertificationStats } from '../../shared/models/certification.model';
 
-const CREDLY_USER_ID = 'b9db7bea-e2e8-4ccb-ade7-a7a4d2379c90';
-const CACHE_KEY = 'portfolio_certifications';
+const CREDLY_USERNAME = 'pakou-komi-juste';
+const CACHE_KEY = 'portfolio_certifications_v2';
 const CACHE_TTL = 30 * 60 * 1000;
 
 interface AllOriginsResponse {
@@ -28,7 +28,10 @@ interface CredlyBadge {
         description: string;
         image_url: string;
         issuer_id: string;
+        skills: Array<{ name: string }>;
     };
+    issued_at_date: string;
+    expires_at_date: string | null;
     issuer: {
         entities: Array<{
             entity: {
@@ -60,13 +63,17 @@ export class CertificationsService {
 
         this._loading$.next(true);
 
-        const targetUrl = `https://www.credly.com/users/${CREDLY_USER_ID}/badges.json`;
+        const targetUrl = `https://www.credly.com/users/${CREDLY_USERNAME}/badges.json`;
         const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&timestamp=${Date.now()}`;
 
         return this.http.get<AllOriginsResponse>(proxyUrl).pipe(
             map(response => {
                 const parsed: CredlyResponse = JSON.parse(response.contents);
-                return this.mapCredlyResponse(parsed.data);
+                if (parsed && Array.isArray(parsed.data)) {
+                    return this.mapCredlyResponse(parsed.data);
+                }
+                console.warn('Credly data is not an array:', parsed);
+                return [];
             }),
             tap(certs => {
                 const sorted = [...certs].sort((a, b) =>
@@ -107,10 +114,11 @@ export class CertificationsService {
             imageUrl: item.badge_template.image_url,
             badgeUrl: `https://www.credly.com/badges/${item.id}/public_url`,
             verifyUrl: `https://www.credly.com/badges/${item.id}/public_url`,
-            issuedAt: item.issued_at,
-            expiresAt: item.expires_at || undefined,
+            issuedAt: item.issued_at_date,
+            expiresAt: item.expires_at_date || undefined,
             isActive: item.state === 'active',
-            category: 'Tech' // Default category
+            category: 'Tech',
+            skills: item.badge_template.skills?.map(s => s.name) || []
         }));
     }
 
