@@ -34,7 +34,10 @@ export class HomeComponent implements OnInit {
         {
             name: 'Frontend',
             skills: [
-                { name: 'Angular', icon: '🅰', color: '#dd0031' },
+                { name: 'HTML', icon: '📄', color: '#e34f26' },
+                { name: 'CSS', icon: '🎨', color: '#1572b6' },
+                { name: 'Bootstrap', icon: '🅱️', color: '#7952b3' },
+                { name: 'Angular', icon: '🅰️', color: '#dd0031' },
                 { name: 'TypeScript', icon: 'TS', color: '#3178c6' }
             ]
         },
@@ -51,8 +54,8 @@ export class HomeComponent implements OnInit {
             name: 'DevOps',
             skills: [
                 { name: 'Docker', icon: '🐳', color: '#2496ed' },
-                { name: 'Kubernetes', icon: '☸️', color: '#326ce5' },
-                { name: 'GitHub Actions', icon: '🐙', color: '#2088ff' }
+                { name: 'GitHub Actions', icon: '🐙', color: '#2088ff' },
+                { name: 'Kubernetes', icon: '☸️', color: '#326ce5' }
             ]
         }
     ];
