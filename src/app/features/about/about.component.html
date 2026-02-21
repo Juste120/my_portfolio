@@ -9,7 +9,7 @@
         <div class="about-hero">
             <div class="about-avatar animate-fade-up">
                 <div class="avatar-frame">
-                    <span class="avatar-text">KJP</span>
+                    <img src="doc/profile.jpg" alt="PAKOU Komi Juste" class="avatar-img">
                 </div>
                 <div class="avatar-badge">
                     <span>🇹🇬</span> Lomé, Togo
@@ -20,26 +20,23 @@
                 <h2 class="bio-name">PAKOU Komi Juste</h2>
                 <p class="bio-title">Développeur Backend &amp; Team Lead</p>
                 <p class="bio-text">
-                    Développeur passionné avec une expertise solide en architecture backend modulaire,
-                    APIs REST sécurisées et déploiement d'applications performantes.
-                    Je maîtrise l'écosystème Java/Spring Boot et contribue à des projets ambitieux
-                    tels que le Titan Marketplace — une plateforme multi-services innovante.
+                    Développeur passionné avec une expertise solide en <strong>Architecture</strong> backend modulaire,
+                    conception de <strong>RestApi</strong> sécurisées et déploiement d'applications performantes.
+                    Je maîtrise l'écosystème Java/Spring Boot et Angular pour créer des solutions Full Stack robustes.
                 </p>
                 <p class="bio-text">
                     Fort de mon expérience en tant que Team Lead, je suis capable de guider
                     des équipes techniques tout en maintenant une haute qualité de code.
-                    Toujours curieux, je reste à l'affût des dernières tendances en DevOps et
-                    architecture logicielle.
+                    Spécialiste du déploiement conteneurisé et de l'automatisation CI/CD.
                 </p>
                 <div class="bio-actions">
-                    <a href="/assets/cv-pakou-juste.pdf" download class="btn-primary">
+                    <a [href]="cvLink" target="_blank" class="btn-primary">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
                         </svg>
-                        Télécharger CV
+                        Voir mon CV
                     </a>
                     <a routerLink="/contact" class="btn-outline">Me Contacter</a>
                 </div>

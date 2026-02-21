@@ -37,6 +37,13 @@
     @include flex-center;
     box-shadow: $shadow-xl, 0 0 60px rgba($primary, 0.2);
     border: 4px solid rgba($white, 0.6);
+    overflow: hidden; // Ensure image stays inside
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .avatar-text {
@@ -312,7 +319,7 @@
 
 .tech-badge {
     background: rgba($book-blue, 0.12);
-    color: darken($book-blue, 15%);
+    color: $book-blue;
     border: 1px solid rgba($book-blue, 0.2);
     border-radius: $radius-full;
     padding: $spacing-1 $spacing-2;

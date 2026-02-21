@@ -24,15 +24,22 @@ interface Experience {
 })
 export class AboutComponent {
     skills: Skill[] = [
-        { name: 'Java', level: 92, category: 'Backend' },
-        { name: 'Spring Boot', level: 90, category: 'Backend' },
-        { name: 'Angular', level: 85, category: 'Frontend' },
-        { name: 'TypeScript', level: 82, category: 'Frontend' },
-        { name: 'PostgreSQL', level: 80, category: 'Database' },
-        { name: 'Docker', level: 78, category: 'DevOps' },
-        { name: 'GitLab CI', level: 75, category: 'DevOps' },
-        { name: 'Spring Modulith', level: 70, category: 'Backend' },
+        { name: 'Java 17 / 21', level: 92, category: 'Backend' },
+        { name: 'Spring Boot 3', level: 90, category: 'Backend' },
+        { name: 'Spring WebFlux', level: 85, category: 'Backend' },
+        { name: 'Spring AI', level: 82, category: 'Backend' },
+        { name: 'Angular', level: 88, category: 'Frontend' },
+        { name: 'TypeScript', level: 85, category: 'Frontend' },
+        { name: 'PostgreSQL', level: 90, category: 'Database' },
+        { name: 'MongoDB', level: 85, category: 'Database' },
+        { name: 'Neo4j', level: 75, category: 'Database' },
+        { name: 'MinIO', level: 80, category: 'Database' },
+        { name: 'Docker', level: 88, category: 'DevOps' },
+        { name: 'Kubernetes', level: 80, category: 'DevOps' },
+        { name: 'GitHub Actions', level: 85, category: 'DevOps' },
     ];
+
+    cvLink = 'https://docs.google.com/document/d/18tGZv406cPIquhzMJKVtDM5caHGiG5zSwwZnfmW1gYU/edit?usp=sharing';
 
     experiences: Experience[] = [
         {

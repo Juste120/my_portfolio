@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
             skills: [
                 { name: 'Java 17 / 21', icon: '☕', color: '#f89820' },
                 { name: 'Spring Boot 3', icon: '🍃', color: '#6db33f' },
-                { name: 'Spring AI', icon: '🤖', color: '#00a67e' },
-                { name: 'Quarkus', icon: '🚀', color: '#4695eb' }
+                { name: 'Spring WebFlux', icon: '🌊', color: '#6db33f' },
+                { name: 'Spring AI', icon: '🤖', color: '#00a67e' }
             ]
         },
         {
@@ -36,6 +36,15 @@ export class HomeComponent implements OnInit {
             skills: [
                 { name: 'Angular', icon: '🅰', color: '#dd0031' },
                 { name: 'TypeScript', icon: 'TS', color: '#3178c6' }
+            ]
+        },
+        {
+            name: 'Base de données',
+            skills: [
+                { name: 'PostgreSQL', icon: '🐘', color: '#336791' },
+                { name: 'MongoDB', icon: '🍃', color: '#47a248' },
+                { name: 'Neo4j', icon: '🌿', color: '#008cc1' },
+                { name: 'MinIO', icon: '📦', color: '#c72e49' }
             ]
         },
         {
