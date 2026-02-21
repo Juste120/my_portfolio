@@ -8,7 +8,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { Certification, CertificationFilter, CertificationStats } from '../../shared/models/certification.model';
 
 const CREDLY_USERNAME = 'pakou-komi-juste';
-const CACHE_KEY = 'portfolio_certifications_v2';
+const CACHE_KEY = 'portfolio_certifications_v3';
 const CACHE_TTL = 30 * 60 * 1000;
 
 interface AllOriginsResponse {
@@ -106,20 +106,27 @@ export class CertificationsService {
     }
 
     private mapCredlyResponse(data: CredlyBadge[]): Certification[] {
-        return data.map(item => ({
-            id: item.id,
-            name: item.badge_template.name,
-            description: item.badge_template.description,
-            issuer: item.issuer.entities[0]?.entity?.name || 'Inconnu',
-            imageUrl: item.badge_template.image_url,
-            badgeUrl: `https://www.credly.com/badges/${item.id}/public_url`,
-            verifyUrl: `https://www.credly.com/badges/${item.id}/public_url`,
-            issuedAt: item.issued_at_date,
-            expiresAt: item.expires_at_date || undefined,
-            isActive: item.state === 'active',
-            category: 'Tech',
-            skills: item.badge_template.skills?.map(s => s.name) || []
-        }));
+        const now = new Date();
+        return data.map(item => {
+            const expiresDate = item.expires_at_date ? new Date(item.expires_at_date) : null;
+            const isNotExpired = !expiresDate || expiresDate > now;
+            const isActiveState = item.state === 'active' || item.state === 'accepted';
+
+            return {
+                id: item.id,
+                name: item.badge_template.name,
+                description: item.badge_template.description,
+                issuer: item.issuer.entities[0]?.entity?.name || 'Inconnu',
+                imageUrl: item.badge_template.image_url,
+                badgeUrl: `https://www.credly.com/badges/${item.id}/public_url`,
+                verifyUrl: `https://www.credly.com/badges/${item.id}/public_url`,
+                issuedAt: item.issued_at_date,
+                expiresAt: item.expires_at_date || null,
+                isActive: isActiveState && isNotExpired,
+                category: 'Tech',
+                skills: item.badge_template.skills?.map(s => s.name) || []
+            };
+        });
     }
 
     filterCertifications(certs: Certification[], filter: CertificationFilter): Certification[] {
