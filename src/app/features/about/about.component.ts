@@ -67,7 +67,7 @@ export class AboutComponent {
             company: 'KOF Corporation',
             location: 'Lomé, Togo',
             description: 'Réseau social mobile avec Flutter et Spring Boot. Auth JWT, messages temps réel, fil d\'actualité, notifications push.',
-            techs: ['Spring Boot', 'Flutter', 'MySQL', 'WebSocket']
+            techs: ['Spring Boot', 'Flutter', 'MySQL']
         }
     ];
 
