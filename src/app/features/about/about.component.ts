@@ -27,7 +27,7 @@ export class AboutComponent {
         { name: 'Java 17 / 21', level: 80, category: 'Backend' },
         { name: 'Spring Boot 3', level: 82, category: 'Backend' },
         { name: 'Spring WebFlux', level: 70, category: 'Backend' },
-        { name: 'Spring AI', level: 65, category: 'Backend' },
+        { name: 'Spring AI', level: 52, category: 'Backend' },
         { name: 'HTML', level: 85, category: 'Frontend' },
         { name: 'CSS', level: 80, category: 'Frontend' },
         { name: 'Bootstrap', level: 75, category: 'Frontend' },
@@ -35,11 +35,11 @@ export class AboutComponent {
         { name: 'TypeScript', level: 75, category: 'Frontend' },
         { name: 'PostgreSQL', level: 82, category: 'Database' },
         { name: 'MongoDB', level: 72, category: 'Database' },
-        { name: 'Neo4j', level: 65, category: 'Database' },
-        { name: 'MinIO', level: 68, category: 'Database' },
+        { name: 'Neo4j', level: 50, category: 'Database' },
+        { name: 'MinIO', level: 52, category: 'Database' },
         { name: 'Docker', level: 78, category: 'DevOps' },
-        { name: 'GitHub Actions', level: 72, category: 'DevOps' },
-        { name: 'Kubernetes', level: 65, category: 'DevOps' },
+        { name: 'GitHub Actions', level: 55, category: 'DevOps' },
+        { name: 'Kubernetes', level: 52, category: 'DevOps' },
     ];
 
     cvLink = 'https://docs.google.com/document/d/18tGZv406cPIquhzMJKVtDM5caHGiG5zSwwZnfmW1gYU/edit?usp=sharing';
