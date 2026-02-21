@@ -1,6 +1,7 @@
 // =============================================================================
 // project-card.component.scss
 // =============================================================================
+@use "sass:color";
 @use '../../../../styles/variables' as *;
 @use '../../../../styles/mixins' as *;
 
@@ -101,7 +102,7 @@
 
 .tech-badge {
     background: rgba($book-blue, 0.12);
-    color: darken($book-blue, 15%);
+    color: color.scale($book-blue, $lightness: -15%);
     border: 1px solid rgba($book-blue, 0.2);
     border-radius: $radius-full;
     padding: $spacing-1 $spacing-2;
@@ -160,7 +161,7 @@
 
     &--details {
         background: rgba($secondary, 0.1);
-        color: darken($secondary, 10%);
+        color: color.scale($secondary, $lightness: -10%);
         border-color: rgba($secondary, 0.2);
         margin-left: auto;
 

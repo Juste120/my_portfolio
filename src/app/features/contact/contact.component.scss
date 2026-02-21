@@ -1,6 +1,7 @@
 // =============================================================================
 // contact.component.scss
 // =============================================================================
+@use "sass:color";
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -45,14 +46,14 @@
 
     &--success {
         background: rgba($book-mint, 0.15);
-        color: darken($book-mint, 25%);
+        color: color.scale($book-mint, $lightness: -25%);
         border: 1px solid rgba($book-mint, 0.3);
     }
 
     &--error {
         background: rgba($book-coral, 0.12);
-        color: darken($book-coral, 15%);
-        border: 1px solid rgba($book-coral, 0.3);
+        color: color.scale($book-coral, $lightness: -15%);
+        border: 1px solid rgba($book-coral, 0.25);
     }
 
     &__close {

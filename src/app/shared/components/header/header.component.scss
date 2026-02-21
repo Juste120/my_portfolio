@@ -19,10 +19,10 @@
     }
 
     &__inner {
+        height: 100%; // Moved above mixins
+        gap: $spacing-6; // Moved above mixins
         @include flex-between;
         @include container;
-        height: 100%;
-        gap: $spacing-6;
     }
 
     &__logo {
@@ -58,12 +58,12 @@
     }
 
     &__cta {
+        padding: $spacing-2 $spacing-5;
+        font-size: $font-size-sm;
+
         @include max-md {
             display: none;
         }
-
-        padding: $spacing-2 $spacing-5;
-        font-size: $font-size-sm;
     }
 
     &__burger {

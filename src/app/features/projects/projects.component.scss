@@ -1,6 +1,7 @@
 // =============================================================================
 // projects.component.scss
 // =============================================================================
+@use "sass:color";
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -86,9 +87,9 @@
 .btn-reset {
     padding: $spacing-2 $spacing-5;
     border-radius: $radius-md;
-    border: 1.5px solid rgba($book-coral, 0.3);
-    background: rgba($book-coral, 0.08);
-    color: darken($book-coral, 10%);
+    background: rgba($book-coral, 0.1);
+    color: color.scale($book-coral, $lightness: -10%);
+    border: 1px solid rgba($book-coral, 0.2);
     font-size: $font-size-sm;
     cursor: pointer;
     transition: all $transition-fast;

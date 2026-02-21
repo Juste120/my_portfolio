@@ -1,6 +1,7 @@
 // =============================================================================
 // certifications.component.scss
 // =============================================================================
+@use "sass:color";
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -298,9 +299,9 @@
     }
 
     &--verify {
-        background: rgba($book-mint, 0.1);
-        color: darken($book-mint, 20%);
-        border-color: rgba($book-mint, 0.2);
+        background: rgba($book-mint, 0.12);
+        color: color.scale($book-mint, $lightness: -20%);
+        border: 1px solid rgba($book-mint, 0.25);
 
         &:hover {
             background: $book-mint;

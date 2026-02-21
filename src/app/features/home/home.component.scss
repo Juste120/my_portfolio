@@ -257,8 +257,8 @@
 
 // Stats
 .stats-section {
+    background: $bg-alt; // Moved above nested rules
     @include section-padding;
-    background: $bg-alt;
 }
 
 .stats-grid {
@@ -294,8 +294,8 @@
 
 // Skills preview
 .skills-preview {
+    background: $background; // Moved above nested rules
     @include section-padding;
-    background: $background;
 }
 
 .skills-categories {

@@ -1,6 +1,7 @@
 // =============================================================================
 // styles.scss — Global styles entry point
 // =============================================================================
+@use "sass:color";
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 @use 'styles/animations' as *;

@@ -1,6 +1,7 @@
 // =============================================================================
 // _animations.scss — Keyframes & Animation utilities
 // =============================================================================
+@use "sass:color";
 @use 'variables' as *;
 
 // --- Keyframes ----------------------------------------------------------------
@@ -244,7 +245,7 @@
 .shimmer {
     background: linear-gradient(90deg,
             $book-sand 25%,
-            darken($book-sand, 5%) 50%,
+            color.scale($book-sand, $lightness: -5%) 50%,
             $book-sand 75%);
     background-size: 200% auto;
     animation: shimmer 1.5s infinite;
